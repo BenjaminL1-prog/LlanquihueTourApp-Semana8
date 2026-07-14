@@ -4,23 +4,26 @@
 
 LlanquihueTourApp es una aplicación desarrollada en Java que permite gestionar información relacionada con la agencia ficticia **Llanquihue Tour**, ubicada en la Región de Los Lagos, Chile.
 
-En esta versión del proyecto se amplía el sistema incorporando nuevas entidades de la agencia, permitiendo registrar y administrar guías turísticos, vehículos y colaboradores externos. Además, se implementan interfaces, herencia, polimorfismo, colecciones genéricas y una interfaz gráfica básica para facilitar la interacción con el usuario.
+El proyecto fue evolucionando durante las distintas actividades de la asignatura, incorporando la administración de tours turísticos, servicios turísticos y nuevas entidades de la agencia, como guías turísticos, vehículos y colaboradores externos.
 
-El proyecto fue desarrollado aplicando principios de Programación Orientada a Objetos (POO), modularidad, reutilización de código y buenas prácticas de programación.
+En esta versión se aplican conceptos de Programación Orientada a Objetos (POO), como interfaces, herencia, polimorfismo, colecciones genéricas, validación mediante `instanceof` e interfaz gráfica desarrollada con `JOptionPane`.
 
 ---
 
 ## 2. Funcionalidades principales
 
-* Registro de guías turísticos.
-* Registro de vehículos.
-* Registro de colaboradores externos.
-* Almacenamiento de entidades mediante una colección genérica (`ArrayList<Registrable>`).
-* Visualización de todas las entidades registradas.
-* Implementación de interfaces para definir un comportamiento común.
-* Aplicación de herencia entre clases.
-* Uso de polimorfismo e identificación de objetos mediante `instanceof`.
-* Interfaz gráfica desarrollada con `JOptionPane` para el ingreso y visualización de información.
+- Lectura de datos desde archivo de texto.
+- Gestión de tours turísticos.
+- Gestión de servicios turísticos.
+- Registro de guías turísticos.
+- Registro de vehículos.
+- Registro de colaboradores externos.
+- Almacenamiento de entidades mediante colecciones dinámicas (`ArrayList`).
+- Visualización de información desde una interfaz gráfica.
+- Implementación de interfaces para definir comportamientos comunes.
+- Aplicación de herencia entre clases.
+- Aplicación de polimorfismo mediante sobrescritura de métodos.
+- Identificación de objetos utilizando el operador `instanceof`.
 
 ---
 
@@ -32,37 +35,47 @@ El sistema se encuentra organizado en los siguientes paquetes:
 
 Contiene las clases principales del dominio del problema:
 
-* Registrable (interfaz común para las entidades gestionables).
-* Persona (superclase).
-* RecursoAgencia (superclase).
-* GuiaTuristico.
-* Vehiculo.
-* ColaboradorExterno.
+- Tour
+- Proveedor
+- ServicioTuristico
+- RutaGastronomica
+- PaseoLacustre
+- ExcursionCultural
+- Registrable (interfaz)
+- Persona (superclase)
+- RecursoAgencia (superclase)
+- GuiaTuristico
+- ColaboradorExterno
+- Vehiculo
 
 ### data
 
-Contiene la lógica de gestión de datos:
+Contiene la lógica de acceso y gestión de datos:
 
-* GestorDatos.
-* GestorEntidades.
+- GestorDatos
+- GestorServicios
+- GestorEntidades
 
 ### ui
 
-Contiene la clase principal del sistema:
+Contiene las clases relacionadas con la interfaz del sistema:
 
-* Main.
+- Main
+- InterfazAgencia
 
 ---
 
 ## 4. Relación entre clases
 
-El sistema incorpora dos jerarquías de herencia.
+El proyecto incorpora distintos conceptos de Programación Orientada a Objetos.
 
-La primera corresponde a la clase **Persona**, que actúa como superclase de **GuiaTuristico** y **ColaboradorExterno**, permitiendo reutilizar atributos y comportamientos comunes.
+La clase **Tour** mantiene una relación de composición con la clase **Proveedor**, ya que cada tour posee internamente un proveedor asociado.
 
-La segunda corresponde a la clase **RecursoAgencia**, utilizada como superclase de **Vehiculo**, representando los recursos físicos administrados por la agencia.
+Además, existe una jerarquía de herencia donde **ServicioTuristico** actúa como superclase de **RutaGastronomica**, **PaseoLacustre** y **ExcursionCultural**, permitiendo aplicar polimorfismo mediante la sobrescritura del método `mostrarInformacion()`.
 
-Además, todas las entidades implementan la interfaz **Registrable**, la cual define el método `mostrarResumen()`. Esto permite almacenar objetos de distintos tipos dentro de una misma colección (`ArrayList<Registrable>`) y aplicar polimorfismo al recorrerla.
+Para esta versión del proyecto se incorporó una nueva jerarquía de clases. **Persona** funciona como superclase de **GuiaTuristico** y **ColaboradorExterno**, mientras que **RecursoAgencia** actúa como superclase de **Vehiculo**.
+
+Asimismo, las entidades **GuiaTuristico**, **ColaboradorExterno** y **Vehiculo** implementan la interfaz **Registrable**, permitiendo almacenarlas dentro de una colección genérica (`ArrayList<Registrable>`).
 
 Durante el recorrido de la colección se utiliza el operador `instanceof` para identificar el tipo específico de cada objeto y ejecutar la lógica correspondiente.
 
@@ -73,27 +86,34 @@ Durante el recorrido de la colección se utiliza el operador `instanceof` para i
 Para ejecutar el proyecto:
 
 1. Abrir el proyecto en IntelliJ IDEA o Visual Studio Code con soporte para Java.
-2. Ejecutar la clase **Main** ubicada en el paquete **ui**.
-3. Utilizar el menú mostrado mediante `JOptionPane`.
-4. Registrar guías turísticos, vehículos o colaboradores externos.
-5. Visualizar el resumen de todas las entidades registradas.
+2. Verificar que el archivo de datos se encuentre en la ruta `resources/tours.txt`.
+3. Ejecutar la clase **Main** ubicada en el paquete **ui**.
+4. Utilizar el menú de la interfaz gráfica desarrollado con `JOptionPane`.
+5. Registrar guías turísticos, vehículos o colaboradores externos.
+6. Visualizar el resumen de las entidades registradas.
 
 ---
 
 ## 6. Tecnologías utilizadas
 
-* Lenguaje de programación: Java
-* Paradigma: Programación Orientada a Objetos (POO)
-* Interfaz gráfica: JOptionPane (Swing)
-* Estructuras de datos: ArrayList
-* Conceptos aplicados:
+- Lenguaje de programación: Java
+- Paradigma: Programación Orientada a Objetos (POO)
+- Manejo de archivos: BufferedReader / FileReader
+- Interfaz gráfica: JOptionPane (Swing)
+- Estructuras de datos: ArrayList y List
 
-  * Interfaces
-  * Herencia
-  * Polimorfismo
-  * instanceof
-  * Colecciones genéricas
-* Entorno de desarrollo: IntelliJ IDEA
+### Conceptos aplicados
+
+- Composición
+- Interfaces
+- Herencia
+- Polimorfismo
+- instanceof
+- Colecciones genéricas
+
+Entorno de desarrollo:
+
+- IntelliJ IDEA
 
 ---
 
